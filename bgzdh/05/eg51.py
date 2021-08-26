@@ -28,8 +28,8 @@ ws = wb.active  # 激活工作表
 for row in range(2, ws.max_row + 1):  # 2-->跳过标题行,ws.max_row+1包含到最后一行
     doc = Document('合同模板.docx')  # 打开模板文档
     for col in range(1, ws.max_column + 1):  # 遍历列数据,同理最大值+1
-        old_info = str(ws.cell(row=1, column=col).value)
-        new_info = str(ws.cell(row=row, column=col).value)
+        old_info = str(ws.cell(row=1, column=col).value)  # 读取列标题
+        new_info = str(ws.cell(row=row, column=col).value)  # 读取表格中的数据
         info_update(doc, old_info, new_info)  # 调用替换函数替换值
-    com_name = str(ws.cell(row=row, column=2).value)
-    doc.save(f'{com_name}合同.docx')
+    com_name = str(ws.cell(row=row, column=2).value)  # 取出公司名称用于文件命名
+    doc.save(f'{com_name}合同.docx')  # 用新名称存档
